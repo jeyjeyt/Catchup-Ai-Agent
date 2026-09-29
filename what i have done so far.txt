@@ -1,0 +1,9 @@
+What I Have Done so Far: Set up the project
+
+1.The board: storing the 61 cells
+2. Placing stones and showing the board on screen
+
+Finding groups and computing scores
+The turn rules: 1, 2, or 3 stones
+The game loop: typing in moves, undo, game over
+A "dumb" player that picks random legal moves
