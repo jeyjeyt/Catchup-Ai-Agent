@@ -1,7 +1,7 @@
 What I Have Done so Far: Set up the project
-
-1.The board: storing the 61 cells
-2. Placing stones and showing the board on screen
+1.Set up the project
+2.The board: storing the 61 cells
+3. Placing stones and showing the board on screen
 
 Finding groups and computing scores
 The turn rules: 1, 2, or 3 stones

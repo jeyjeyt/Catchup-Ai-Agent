@@ -1,3 +1,5 @@
+"""This module defines the board structure and 
+provides functions to create and print the board state."""
 
 def get_board():
     board = []
@@ -59,3 +61,38 @@ def print_board(board,state):
         print(row_number + " " + padding + row_str.rstrip())
 
 print_board(board, state)
+
+"""This module place the stones on the board and 
+provides functions to update the board state."""
+
+def place_stone(state,cell,stone_color):
+    cell = cell.strip().upper()
+    #cell is not in the state
+    if cell not in state:
+        print("Invalid cell")
+        return False 
+
+    #cell is already occupied
+    if cell in state and state[cell] is not None:
+        print("Cell is already occupied")
+        return False
+
+    #place the color on the cell
+    stone_color = stone_color.strip().upper()
+    if stone_color != "W" and stone_color != "B":
+        print("Invalid stone color")
+        return False
+
+    state[cell] = stone_color
+    return True 
+
+if __name__ == "__main__":
+    board = get_board()
+    state = create_empty_state(board)
+
+    place_stone(state, "E5", "W")    # good move → should work
+    place_stone(state, "E5", "B")    # same cell → "Cell is already occupied"
+    place_stone(state, "Z9", "W")    # doesn't exist → "Invalid cell"
+
+    print_board(board, state)
+    
