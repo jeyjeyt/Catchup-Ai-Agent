@@ -1,1 +1,5 @@
-# Catchup-Ai-Agent
+# Catchup AI Agent
+
+Catchup is a two-player board game designed by Nick Bentley, played on a hexagonal grid of 61 cells (5 cells per side). The objective of the game is to have the largest group of connected stones when the board is full. Gameplay involves players taking turns placing one or two stones onto empty cells of the grid. Stones cannot be captured or moved once placed. What makes Catchup unique is its catch-up rule: whenever a player's largest group grows to match or exceed their opponent's, the opponent may place up to three stones on their next turn. This means that as you get closer to winning, your opponent gets more powerful, making the game as much about timing as about position. The game ends when the board is full, and the player with the largest group wins.
+
+This repository contains code for an AI agent that plays the game of Catchup, built on the Alpha-Beta search algorithm. [Add here the enhancements you implemented, e.g. "The search is enhanced with ..."]. [Add here your evaluation function, e.g. "Positions are evaluated using ..."]. The project was developed as part of the Intelligent Search & Games course at Maastricht University.
