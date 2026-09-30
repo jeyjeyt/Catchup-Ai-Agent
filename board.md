@@ -123,3 +123,14 @@ After all the rows and cells have been processed, the function returns the compl
 The result is a dictionary containing every cell of the board, with `None` as its initial value.
 
 This creates an empty representation of the board that can later be updated when pieces are placed on the cells.
+
+## Finding groups and scores
+
+### `get_neighbors(cell, state)`
+Every cell on the hexagonal board touches up to 6 other cells. Using the course's coordinate system (letters for the diagonal columns, numbers for the rows), I noticed that the neighbors of a cell always follow the same pattern: the cells with the same letter and the number one up or one down, the cells with the same number and the letter one up or one down, and two diagonal cells where both the letter and the number change in the same direction (both +1 or both −1). For example, the neighbors of E5 are E4, E6, D5, F5, D4 and F6. Instead of checking the edges of the board with many conditions (which is tricky because the rows have different lengths), the function generates all 6 candidate neighbors and then keeps only those that actually exist on the board (`neighbor in state`). This works for every cell, including corners and edges.
+
+### `find_groups(state)`
+A group is a set of connected stones of the same color. To find all groups, the function goes through every cell of the board. When it finds a stone that has not been counted yet, a new group starts, and it "spreads" from that stone to all connected stones of the same color, like a rumor passing from person to person. This technique is called flood fill. It uses two lists: `visited`, which remembers every stone that already belongs to a group so that nothing is counted twice, and `to_check`, a to-do list of stones whose neighbors still need to be looked at. Every new same-color stone that is found is added to both lists, and the spreading continues until the to-do list is empty. At that point the group is complete, and its size is saved in the list of the right color. The function returns two lists with the sizes of all white groups and all black groups. Keeping all the sizes (and not only the biggest one) is needed for the tie-breaker at the end of the game.
+
+### `get_score(state)`
+A player's score is the size of their largest group. This function takes the two lists from `find_groups` and returns the biggest value of each. If a player has no stones on the board yet (for example at the start of the game), their list is empty, and according to the rules their score counts as 1.

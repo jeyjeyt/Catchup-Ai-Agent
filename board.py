@@ -86,13 +86,80 @@ def place_stone(state,cell,stone_color):
     state[cell] = stone_color
     return True 
 
-if __name__ == "__main__":
-    board = get_board()
-    state = create_empty_state(board)
+#if __name__ == "__main__":
+#    board = get_board()
+#    state = create_empty_state(board)
+#
+#    place_stone(state, "E5", "W")    # good move → should work
+#    place_stone(state, "E5", "B")    # same cell → "Cell is already occupied"
+#    place_stone(state, "Z9", "W")    # doesn't exist → "Invalid cell"
+#
+#    print_board(board, state)
 
-    place_stone(state, "E5", "W")    # good move → should work
-    place_stone(state, "E5", "B")    # same cell → "Cell is already occupied"
-    place_stone(state, "Z9", "W")    # doesn't exist → "Invalid cell"
+"""Finding groups"""
 
-    print_board(board, state)
+def get_neighbors(cell, state):
+    letters = "ABCDEFGHI"
+    row = int(cell[1:])
+    col = letters.index(cell[0])
+
+    neighbors = []
+    neighbors.append(letters[col] + str(row - 1))  # Down
+    neighbors.append(letters[col] + str(row + 1))  # Up
+    if col > 0:
+        neighbors.extend((letters[col - 1] + str(row), letters[col - 1] + str(row - 1)))
+    if col < len(letters) - 1:
+        neighbors.extend((letters[col + 1] + str(row), letters[col + 1] + str(row + 1)))
+
+    return [neighbor for neighbor in neighbors if neighbor in state]
+
+
+def find_groups(state):
+    visited = []
+    group_white = []
+    group_black = []
+
+    for cell in state:
+        if cell not in visited and state[cell] is not None:
+            score = 1
+            visited.append(cell)
+            to_check = [cell]
+            while to_check:
+                current = to_check.pop()
+                neighbors = get_neighbors(current, state)
+                for neighbor in neighbors:
+                    if neighbor not in visited and state[neighbor] is not None:
+                        if state[neighbor] == state[cell]:
+                            score += 1
+                            visited.append(neighbor)
+                            to_check.append(neighbor)
+
+            if state[cell] == "W":
+                group_white.append(score)
+            else:
+                group_black.append(score)
     
+
+    return group_white,group_black
+
+def get_score(state):
+    group_white, group_black = find_groups(state)
+    if not group_white:
+        score_white = 1
+    else:
+        score_white = max(group_white)
+    if not group_black:
+        score_black= 1
+    else:
+        score_black = max(group_black)
+
+    return score_white, score_black
+
+
+"""Game Over """
+
+def is_board_full(state):
+    for cell in state:
+        if state[cell] is None: 
+            return False 
+    return True 
