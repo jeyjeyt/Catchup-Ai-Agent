@@ -29,7 +29,7 @@ def get_board():
 
     return board
 
-board = get_board()
+
 #print(board)
 #print("Number of rows:", len(board))
 #number_of_cells = 0
@@ -45,7 +45,7 @@ def create_empty_state(board):
             state[cell] = None
     return state
 
-state = create_empty_state(board)
+
     
 def print_board(board,state):
     max_row_length = max(len(row) for row in board)
@@ -60,7 +60,7 @@ def print_board(board,state):
         padding = " " * (2 * (max_row_length - len(row)))
         print(row_number + " " + padding + row_str.rstrip())
 
-print_board(board, state)
+
 
 """This module place the stones on the board and 
 provides functions to update the board state."""

@@ -1,11 +1,10 @@
 from board import get_board,create_empty_state,print_board,is_board_full,place_stone,get_score
 from game import stones_allowed,the_winner_is
-from player import random_moves
+from alpha_beta_player import best_move_alpha_beta
 
 board = get_board()
 state = create_empty_state(board)
-
-
+SEARCH_DEPTH = 1
 
 
 current_player = "W"
@@ -31,7 +30,7 @@ while is_board_full(state) is False:
     stones_placed = 0
     undo_requested = False
     if current_player == program_color:
-        moves = random_moves(state, max_stones_allowed)
+        moves = best_move_alpha_beta(state, current_player, max_stones_allowed, SEARCH_DEPTH)
         for cell in moves:
             place_stone(state, cell, current_player)
         print("Program plays: " + " ".join(moves))
