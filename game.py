@@ -12,13 +12,17 @@ def stones_allowed(is_first_turn,my_score,opponent_score,opponent_previous_score
     else :
         return 1 # if it is the first turn, the current player may place only 1 stone
 
-def generate_moves(state, max_stones):
+def generate_moves(state, max_stones, cells=None):
     """generates all possible moves for the current player given the current state 
     and the maximum number of stones they can place"""
-    empty_cells = []
-    for cell in state:
-        if state[cell] is None:
-            empty_cells.append(cell)
+    if cells is None:
+        empty_cells = []
+        for cell in state:
+            if state[cell] is None:
+                empty_cells.append(cell)
+    else:
+        empty_cells = cells 
+        
     if not empty_cells or max_stones < 1:
         return []
 

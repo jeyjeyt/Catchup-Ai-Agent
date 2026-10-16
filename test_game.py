@@ -4,7 +4,7 @@ from game import stones_allowed, the_winner_is
 from alpha_beta_player import best_move_alpha_beta
 
 
-def play_one_game(depth_white, depth_black):
+def play_one_game(depth_white, depth_black, show_board=True):
     board = get_board()
     state = create_empty_state(board)
     current_player = "W"
@@ -31,15 +31,24 @@ def play_one_game(depth_white, depth_black):
         for cell in move:
             state[cell] = current_player
 
+        # show every move
+        print(current_player, "plays", " ".join(move),
+              "(max", max_stones, ") | time used so far:",
+              round(time_used[current_player], 1), "s")
+        if show_board:
+            print_board(board, state)
+            print()
+
         is_first_turn = False
         current_player = "B" if current_player == "W" else "W"
 
+    print("Final board:")
     print_board(board, state)
     return the_winner_is(state), time_used
 
 
 if __name__ == "__main__":
-    winner, time_used = play_one_game(1, 1)
+    winner, time_used = play_one_game(3, 3)
     print("Winner:", winner)
     print("Time used by White:", round(time_used["W"], 1), "seconds")
     print("Time used by Black:", round(time_used["B"], 1), "seconds")

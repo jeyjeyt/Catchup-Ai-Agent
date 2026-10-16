@@ -4,7 +4,7 @@ from alpha_beta_player import best_move_alpha_beta
 
 board = get_board()
 state = create_empty_state(board)
-SEARCH_DEPTH = 1
+SEARCH_DEPTH = 2
 
 
 current_player = "W"
