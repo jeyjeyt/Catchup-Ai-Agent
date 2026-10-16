@@ -1,5 +1,5 @@
 from board import get_score
-from itertools import combinations
+from game import generate_moves
 from board import is_board_full
 from game import stones_allowed
 
@@ -11,19 +11,7 @@ def evaluate(state, my_color):
     else: 
         return score_black - score_white
 
-def generate_moves(state, max_stones):
-    empty_cells = []
-    for cell in state:
-        if state[cell] is None:
-            empty_cells.append(cell)
-    if not empty_cells or max_stones < 1:
-        return []
 
-    moves = []
-    for num_stones in range(1, min(max_stones, len(empty_cells)) + 1):
-        for combination in combinations(empty_cells, num_stones):
-            moves.append(combination)
-    return moves
 
 def best_move(state, my_color, max_stones):
     moves = generate_moves(state, max_stones)
