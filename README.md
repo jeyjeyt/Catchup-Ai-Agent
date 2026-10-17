@@ -27,12 +27,12 @@ The project was developed for the Intelligent Search & Games course at Maastrich
 - `game.py`: move generation, the catch-up rule, and winner detection
 - `alpha_beta_player.py`: evaluation functions and alpha-beta search
 - `main.py`: play a game (human vs AI, AI plays either color)
-- `experiment.py`: self-play experiments (candidate cells, depth, evaluation)
+- `experiments.py`: self-play experiments (candidate cells, depth, evaluation)
 
 ## How to run
 
 Requires Python 3.10 (no extra packages).
 
-    python main.py
+    py main.py
 
 On Windows you can also double-click `run.bat`. The program asks which color the AI plays (W or B).
